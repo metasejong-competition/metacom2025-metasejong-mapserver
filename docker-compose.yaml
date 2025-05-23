@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  navigation:
+    build: .
+    container_name: ros2_navigation
+    network_mode: host
+    volumes:
+      - ./launch:/workspace/launch
+      - ./config:/workspace/config
+      - ./scenario-data:/workspace/metasejong/scenario-data
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ${XAUTHORITY}:${XAUTHORITY}:ro
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - XAUTHORITY=${XAUTHORITY}
+      - ROS_DOMAIN_ID=0
+      - ENV_METASEJONG_SCENARIO_CAND=demo, dongcheon, jiphyeon, gwanggaeto 
+      - ENV_METASEJONG_SCENARIO=${ENV_METASEJONG_SCENARIO:-demo}
+      - METASEJONG_PROJECT_PATH=${METASEJONG_PROJECT_PATH}
+      - LIBGL_ALWAYS_SOFTWARE=1
+    command: >
+      bash -c "cd /workspace && ros2 launch launch/navigation_launch.py" 

@@ -1,0 +1,6 @@
+image: S3-map.png
+resolution: 0.05
+origin: [-59.1897181, -67.2408930, 0.0000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
